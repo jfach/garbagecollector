@@ -28,3 +28,5 @@ with open('test.csv', 'wb') as f:
   w = csv.DictWriter(f,dns_dict.keys())
   for data in dns_dict:
     w.writerow(dns_dict)
+    f.close()
+
