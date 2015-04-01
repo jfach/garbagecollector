@@ -3,7 +3,7 @@ Dependency
 In order to use this script you will need to download:
 http://xael.org/norman/python/python-nmap/
 
-For simplicty, run the get-py-nmap.sh script to handle the pull and setup
+For simplicty, run the get-nmap-package.sh script to handle the pull and setup
 
 step 1:
 download python-nmap dependency and run setup.py 
