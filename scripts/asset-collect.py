@@ -27,13 +27,13 @@ with open('networks.txt') as f:
 # iterate through each K,V in net_dict then scan
 
 for k,v in net_dict.iteritems():
-  if v == "6.3.5.0/24":
+  if v == "192.168.1.0/24":
     results = nmapTools.ping_sweep(v)
-  elif v == "6.3.3.0/24":
+  elif v == "192.168.2.0/24":
     results2 = nmapTools.ping_sweep(v)
 
 # iterate through each discovered ip in results
-# performing a dns lookcup using local DNS
+# performing a dns lookup using local DNS
 
 for x in results:
   for y in results[x]:
