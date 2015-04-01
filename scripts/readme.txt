@@ -1,6 +1,10 @@
 http://xael.org/norman/python/python-nmap/
 
-you will need to run setup.py in the python-nmap dir to ensure nmapTools.py works.
+step 1:
 
-garbagecollect's first step is to go fetch assets.
+download python-nmap dependency and run setup.py 
 
+step 2: 
+
+add networks that you wish to scan to networks.txt
+in format netblock1,192.168.1.0/24
