@@ -17,14 +17,15 @@ with open('networks.txt') as f:
   for line in f:
     network = line.rstrip('\n').split(',') 
     net_dict[network[0]] = (network[1])
-# logging output (test) 
+# logging (test) 
 # print net_dict
 
 # iterate through each K,V in net_dict then scan
 for k,v in net_dict.iteritems():
   for x in v:
     results = nmapTools.ping_sweep(v)
-print results
+# logging (test)
+# print results
 
 # iterate through each discovered ip in results
 # performing a dns lookcup using local DNS
@@ -38,4 +39,4 @@ for x in results:
 	# print (dns_rec[2])
 	dns_dict = {'ip':dns_rec[2], 'fqdn': dns_rec[0], 'alias': dns_rec[1]}
         # logging (test)
-        print dns_dict
+        # print dns_dict
