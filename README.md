@@ -12,4 +12,8 @@ download python-nmap dependency and run setup.py
 
 step 2: 
 add networks that you wish to scan to networks.txt
-in format netblock1,192.168.1.0/24
+in format:
+```
+netblock1,192.168.1.0/24
+netblock2,127.0.0.0/24
+```
