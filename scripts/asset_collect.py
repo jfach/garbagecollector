@@ -19,16 +19,27 @@ with open('networks.txt') as f:
     net_dict[network[0]] = (network[1])
 # logging (test) 
 # print net_dict
-
-# iterate through each K,V in net_dict then scan
 results = []
+# iterate through each K,V in net_dict then scan
 for k,v in net_dict.iteritems():
   for x in v:
     results.append(nmapTools.ping_sweep(v))
 # logging (test)
 # print results
 
-
+dns_list = []
+lookups = []
+for result in results:
+  ips = result['scan'].keys()
+  for ip in ips:
+    if ip not in lookups:
+      lookups.append(ip)
+      print ip
+      dns_rec = dnsTools.lookup(ip)
+      if dns_rec[2] is not None:
+        dns_dict = {'ip':dns_rec[2], 'fqdn': dns_rec[0], 'alias': dns_rec[1]}
+        dns_list.append(dns_dict)
+   
 
 """
 # iterate through each discovered ip in results
