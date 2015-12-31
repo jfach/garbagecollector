@@ -27,6 +27,8 @@ for k,v in net_dict.iteritems():
 # logging (test)
 # print results
 
+# iterate through each ip in each result dict in results list
+# if the ip has not been looked up, look it up and add it to lookups list
 dns_list = []
 lookups = []
 for result in results:
@@ -34,25 +36,9 @@ for result in results:
   for ip in ips:
     if ip not in lookups:
       lookups.append(ip)
-      print ip
+      # print ip
       dns_rec = dnsTools.lookup(ip)
       if dns_rec[2] is not None:
         dns_dict = {'ip':dns_rec[2], 'fqdn': dns_rec[0], 'alias': dns_rec[1]}
-        dns_list.append(dns_dict)
-   
-
-"""
-# iterate through each discovered ip in results
-# performing a dns lookcup using local DNS
-for x in results:
-  for y in results[x]:
-    dns_rec = dnsTools.lookup(y) 
-    # logging (test)
-    # print (y,dns_rec[0],dns_rec[1],dns_rec[2])
-    if dns_rec[2] is not None:
-	# logging (test)
-	# print (dns_rec[2])
-	dns_dict = {'ip':dns_rec[2], 'fqdn': dns_rec[0], 'alias': dns_rec[1]}
-        # logging (test)
         # print dns_dict
-"""
+        dns_list.append(dns_dict)
