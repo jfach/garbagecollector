@@ -2,7 +2,7 @@
 # vim: set ts=2 sw=2 ai et:
 import nmapTools
 import dnsTools
-import csv
+import csvTools
 import os
 
 # Read a file of networks in the format
@@ -40,3 +40,5 @@ for x in results:
 	dns_dict = {'ip':dns_rec[2], 'fqdn': dns_rec[0], 'alias': dns_rec[1]}
         # logging (test)
         # print dns_dict
+
+csvTools.write_dict('dns.csv', dns_dict)
