@@ -12,15 +12,16 @@ import os
 # Use the file to create a dictionary of desired networks to scan
 
 net_dict = {}
-
 with open('networks.txt') as f:
   for line in f:
     network = line.rstrip('\n').split(',') 
     net_dict[network[0]] = (network[1])
 # logging (test) 
 # print net_dict
-results = []
+
 # iterate through each K,V in net_dict then scan
+# append each scan result to results list
+results = []
 for k,v in net_dict.iteritems():
   for x in v:
     results.append(nmapTools.ping_sweep(v))
