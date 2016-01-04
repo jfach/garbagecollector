@@ -1,14 +1,13 @@
-import os
 import unittest
 import pep8
-import fixture
+from fixture import TestFixture, REPO_DIR
 
-class TestPep8(fixture.TestFixture):
+class TestPep8(TestFixture):
     """
     Run PEP8 tests.
     """
     def test_conformance(self):
-        checker = pep8.StyleGuide(paths=[os.curdir], reporter=pep8.StandardReport)
+        checker = pep8.StyleGuide(paths=[REPO_DIR], reporter=pep8.StandardReport)
         report = checker.check_files()
         result = report.total_errors
         output = "\n".join(report.get_statistics())
