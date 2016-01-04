@@ -1,6 +1,7 @@
 import pep8
 from fixture import TestFixture, REPO_DIR
 
+
 class TestPep8(TestFixture):
     """
     Run PEP8 tests.
