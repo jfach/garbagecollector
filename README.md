@@ -1,4 +1,5 @@
 # garbagecollector
+[![Circle CI](https://circleci.com/gh/Jfach/garbagecollector.svg?style=shield)](https://circleci.com/gh/Jfach/garbagecollector)
 
 Dependency check
 
