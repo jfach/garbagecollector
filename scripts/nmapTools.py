@@ -3,10 +3,13 @@
 
 import nmap
 
+
 def ping_sweep(ip_block):
-#  Really unintrusive nmap discovery ping scan
-#  Arguments: ip_block = subnet(string)
-#  Returns: Scan Results(dictionary)
-    nm = nmap.PortScanner();
-    results = nm.scan(hosts=ip_block ,  arguments='-n -sP -PE')
+    """
+    Really unintrusive nmap discovery ping scan
+    Arguments: ip_block = subnet(string)
+    Returns: Scan Results(dictionary)
+    """
+    nm = nmap.PortScanner()
+    results = nm.scan(hosts=ip_block,  arguments='-n -sP -PE')
     return results
