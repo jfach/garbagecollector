@@ -60,7 +60,7 @@ for result in results:
                     'alias': dns_rec[1]
                 }
                 # print dns_dict
-                dns_list.append(dns_dict) 
+                dns_list.append(dns_dict)
 
 if filename:
     with open(filename, 'w') as csvfile:
@@ -74,4 +74,3 @@ if filename:
                 'fqdn': dns_dict['fqdn'],
                 'alias': dns_dict['alias']
             })
-
