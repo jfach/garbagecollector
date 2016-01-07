@@ -60,13 +60,7 @@ for result in results:
                     'alias': dns_rec[1]
                 }
                 # print dns_dict
-                dns_list.append(dns_dict)
-
-try:
-    opts, args = getopt.getopt(sys.argv[1:], "f:", ["filename="])
-except getopt.GetOptError as err:
-    # print help information and exit
-    print 
+                dns_list.append(dns_dict) 
 
 if filename:
     with open(filename, 'w') as csvfile:
@@ -80,5 +74,4 @@ if filename:
                 'fqdn': dns_dict['fqdn'],
                 'alias': dns_dict['alias']
             })
-
 
