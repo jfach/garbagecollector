@@ -14,19 +14,22 @@ import sys
 # Use the file to create a dictionary of desired networks to scan
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "f:", ["filename="])
+    opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["netfile=", "filename="])
 except getopt.GetOptError as err:
     print str(err)
     sys.exit(2)
 filename = None
+netfile = 'networks.txt'
 for o, a in opts:
     if o in ("-f", "--filename"):
         filename = a
+    elif o in ("-n", "--netfile"):
+        netfile = a
     else:
         assert False, "unhandled option"
 
 net_dict = {}
-with open('networks.txt') as f:
+with open(netfile) as f:
     for line in f:
         network = line.rstrip('\n').split(',')
         net_dict[network[0]] = (network[1])
