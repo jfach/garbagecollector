@@ -3,13 +3,27 @@
 import nmapTools
 import dnsTools
 import csv
+import getopt
 import os
+import sys
 
 # Read a file of networks in the format
 # net_block(n),n.n.n.n/n
 # example: net_block1,192.168.1.0/24
 # Store in networks.txt (local directory)
 # Use the file to create a dictionary of desired networks to scan
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:], "f:", ["filename="])
+except getopt.GetOptError as err:
+    print str(err)
+    sys.exit(2)
+filename = None
+for o, a in opts:
+    if o in ("-f", "--filename"):
+        filename = a
+    else:
+        assert False, "unhandled option"
 
 net_dict = {}
 with open('networks.txt') as f:
@@ -47,3 +61,24 @@ for result in results:
                 }
                 # print dns_dict
                 dns_list.append(dns_dict)
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:], "f:", ["filename="])
+except getopt.GetOptError as err:
+    # print help information and exit
+    print 
+
+if filename:
+    with open(filename, 'w') as csvfile:
+        fieldnames = ['ip', 'fqdn', 'alias']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writerow(dict(zip(writer.fieldnames, writer.fieldnames)))
+        for dns_dict in dns_list:
+            writer.writerow({
+                'ip': dns_dict['ip'],
+                'fqdn': dns_dict['fqdn'],
+                'alias': dns_dict['alias']
+            })
+
+
