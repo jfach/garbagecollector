@@ -14,15 +14,15 @@ import sys
 # Use the file to create a dictionary of desired networks to scan
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["netfile=", "filename="])
+    opts, args = getopt.getopt(sys.argv[1:], "n:c:", ["netfile=", "csvfile="])
 except getopt.GetOptError as err:
     print str(err)
     sys.exit(2)
-filename = None
+csvfilename = None
 netfile = 'networks.txt'
 for o, a in opts:
-    if o in ("-f", "--filename"):
-        filename = a
+    if o in ("-c", "--csvfile"):
+        csvfilename = a
     elif o in ("-n", "--netfile"):
         netfile = a
     else:
@@ -65,8 +65,8 @@ for result in results:
                 # print dns_dict
                 dns_list.append(dns_dict)
 
-if filename:
-    with open(filename, 'w') as csvfile:
+if csvfilename:
+    with open(csvfilename, 'w') as csvfile:
         fieldnames = ['ip', 'fqdn', 'alias']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 

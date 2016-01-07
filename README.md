@@ -23,7 +23,7 @@ optionally specify file to use instead of networks.txt with --netfile flag:
 python asset_collect.py -n netfile.txt
 ```
 
-output results to csv with the --filename flag:
+output results to csv with the --csvfile flag:
 ```
-python asset_collect.py -f csv_file.csv
+python asset_collect.py -c csv_file.csv
 ```
