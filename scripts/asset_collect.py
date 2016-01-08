@@ -41,8 +41,7 @@ with open(netfile) as f:
 # append each scan result to results list
 results = []
 for k, v in net_dict.iteritems():
-    for x in v:
-        results.append(nmapTools.ping_sweep(v))
+    results.append(nmapTools.ping_sweep(v))
 # logging (test)
 # print results
 
