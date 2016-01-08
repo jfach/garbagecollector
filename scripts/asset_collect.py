@@ -16,7 +16,8 @@ import sys
 try:
     opts, args = getopt.getopt(sys.argv[1:], "n:c:", ["netfile=", "csvfile="])
 except getopt.GetOptError as err:
-    print str(err)
+    print(str(err))
+    print("Usage: python asset_collect.py [-n netfile] [-c csvfile]")
     sys.exit(2)
 csvfilename = None
 netfile = 'networks.txt'
