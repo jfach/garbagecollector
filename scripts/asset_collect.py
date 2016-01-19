@@ -15,7 +15,11 @@ import ad_server
 # Use the file to create a dictionary of desired networks to scan
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "b:n:c:", ["block=", "netfile=", "csvfile="])
+    opts, args = getopt.getopt(
+                               sys.argv[1:],
+                               "b:n:c:",
+                               ["block=", "netfile=", "csvfile="]
+                               )
 except getopt.GetoptError as err:
     print(str(err))
     print("Usage: python asset_collect.py [-n netfile] [-c csvfile]")
@@ -35,7 +39,7 @@ for o, a in opts:
 
 net_dict = {}
 if block:
-  net_dict['cmd_line_netblock'] = block
+    net_dict['cmd_line_netblock'] = block
 else:
     with open(netfile) as f:
         for line in f:
@@ -86,18 +90,6 @@ for result in results:
             output[ip]['result_code'] = 1  # 2 peice missing
 
 print output
-
-"""
-for result in results:
-            lookups.append(ip)
-            dns_rec = dnsTools.lookup(ip)
-            if dns_rec[2] is not None:
-                print "found " + ip + " with dns: "
-                dns_dict = {
-                    'ip': dns_rec[2][0],
-                    'fqdn': dns_rec[0],
-                    'alias': dns_rec[1]
-       
 
 if csvfilename:
     with open(csvfilename, 'w') as csvfile:
