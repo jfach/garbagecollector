@@ -37,10 +37,10 @@ net_dict = {}
 if block:
   net_dict['cmd_line_netblock'] = block
 else:
-  with open(netfile) as f:
-      for line in f:
-          network = line.rstrip('\n').split(',')
-          net_dict[network[0]] = (network[1])
+    with open(netfile) as f:
+        for line in f:
+            network = line.rstrip('\n').split(',')
+            net_dict[network[0]] = (network[1])
 # logging (test)
 
 # iterate through each K,V in net_dict then scan
