@@ -17,3 +17,13 @@ in format:
 netblock1,192.168.1.0/24
 netblock2,127.0.0.0/24
 ```
+
+optionally specify file to use instead of networks.txt with --netfile flag:
+```
+python asset_collect.py -n netfile.txt
+```
+
+output results to csv with the --csvfile flag:
+```
+python asset_collect.py -c csv_file.csv
+```
