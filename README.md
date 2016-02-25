@@ -1,6 +1,6 @@
 # garbagecollector
 
-[![Circle CI](https://circleci.com/gh/cleanerbot/garbagecollector?circle-token=5d84cd337864c33f062f57aafd2854771777759d)](https://circleci.com/gh/cleanerbot/garbagecollector/tree/master 'View CI builds')
+[![Circle CI](https://circleci.com/gh/cleanerbot/garbagecollector?circle-token=89001b8338b393fc8199afcc6ffc9672511fd472)](https://circleci.com/gh/cleanerbot/garbagecollector/tree/master 'View CI builds')
 
 ### Dependency check
 
