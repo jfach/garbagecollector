@@ -1,6 +1,8 @@
 # garbagecollector
 
-Dependency check
+[![Circle CI](https://circleci.com/gh/cleanerbot/garbagecollector?circle-token=5d84cd337864c33f062f57aafd2854771777759d)](https://circleci.com/gh/cleanerbot/garbagecollector/tree/master 'View CI builds')
+
+### Dependency check
 
 In order to use this script you will need to download:
 http://xael.org/norman/python/python-nmap/
