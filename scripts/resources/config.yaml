@@ -1,0 +1,17 @@
+Credentials:
+        LDAP:
+                User:
+                Password:
+        Github:
+                User:
+                Password:
+
+Git_Repo:
+        Repo_Name:
+        Repo_Owner:
+
+LDAP_Settings:
+        Base_DN:
+
+
+
