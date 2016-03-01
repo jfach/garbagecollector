@@ -24,7 +24,6 @@ try:
                                )
 except getopt.GetoptError as err:
     print(str(err))
-    print("Usage: python asset_collect.py [-n netseed] [-b block] [-c csvfile]")
     sys.exit(2)
 block = None
 csvfilename = None
@@ -38,7 +37,7 @@ for o, a in opts:
     elif o in ("-b", "--block"):
         block = a
     elif o in ("-a", "--adseed"):
-	ad_seed = a
+        ad_seed = a
     else:
         assert False, "unhandled option"
 
@@ -91,26 +90,26 @@ for result in results:
             elif ad_results.count([]) < len(ad_servers):
                 output[ip]['result_code'] = 2
                 this_asset = gc_asset.Asset(ip,
-					    ad_servers,
-					    ad_results,
-					    2,
-					    dns_rec[0])
+                                            ad_servers,
+                                            ad_results,
+                                            2,
+                                            dns_rec[0])
                 assets.append(this_asset)
             else:
                 assert len(ad_servers) == ad_results.count([])
                 output[ip]['result_code'] = 3
                 this_asset = gc_asset.Asset(ip,
-					    ad_servers,
-					    ad_results,
-					    3,
-					    dns_rec[0])
+                                            ad_servers,
+                                            ad_results,
+                                            3,
+                                            dns_rec[0])
                 assets.append(this_asset)
         else:
             output[ip]['result_code'] = 1  # 2 peice missing
             this_asset = gc_asset.Asset(ip,
-				        ad_servers,
-			                ad_results,
-					1)
+                                        ad_servers,
+                                        ad_results,
+                                        1)
             assets.append(this_asset)
 
 print "Scan complete"
@@ -127,10 +126,9 @@ if csvfilename:
         writer.writerow(dict(zip(writer.fieldnames, writer.fieldnames)))
         for ip in output.keys():
             writer.writerow({
-                'ip': ip,
-                'result_code': output[ip]['result_code']
-
-            })
+                            'ip': ip,
+                            'result_code': output[ip]['result_code']
+                            })
     print "Wrote output to " + csvfilename
 
 print "Done"
