@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-# vim: set ts=2 sw=2 ai et:
 import nmapTools
 import dnsTools
 import csv
 import getopt
 import os
 import sys
+import time
 import ad_server
+import gc_asset
+import issue_handler
 
 # Read a file of networks in the format
 # net_block(n),n.n.n.n/n
@@ -17,23 +19,26 @@ import ad_server
 try:
     opts, args = getopt.getopt(
                                sys.argv[1:],
-                               "b:n:c:",
-                               ["block=", "netfile=", "csvfile="]
+                               "a:b:n:c:",
+                               ["adseed=", "block=", "netseed=", "csvfile="]
                                )
 except getopt.GetoptError as err:
     print(str(err))
-    print("Usage: python asset_collect.py [-n netfile] [-c csvfile]")
+    print("Usage: python asset_collect.py [-n netseed] [-b block] [-c csvfile]")
     sys.exit(2)
 block = None
 csvfilename = None
-netfile = 'networks.txt'
+netfile = 'seeds/net_seed.txt'
+ad_seed = 'seeds/ad_seed.txt'
 for o, a in opts:
     if o in ("-c", "--csvfile"):
         csvfilename = a
-    elif o in ("-n", "--netfile"):
+    elif o in ("-n", "--netseed"):
         netfile = a
     elif o in ("-b", "--block"):
         block = a
+    elif o in ("-a", "--adseed"):
+	ad_seed = a
     else:
         assert False, "unhandled option"
 
@@ -45,6 +50,12 @@ else:
         for line in f:
             network = line.rstrip('\n').split(',')
             net_dict[network[0]] = (network[1])
+ad_servers = []
+with open(ad_seed) as f:
+    for line in f:
+      ad = line.rstrip('\n').split(',')
+      ad_servers.append(ad_server.AD_Server(ad[1]))
+
 # logging (test)
 
 # iterate through each K,V in net_dict then scan
@@ -57,22 +68,18 @@ for k, v in net_dict.iteritems():
 # iterate through each ip in each result dict in results list
 # if the ip has not been looked up, look it up and add it to lookups list
 dns_list = []
-lookups = []
-
-ad_test1 = ad_server.AD_Server('TC-AD01')
-ad_test2 = ad_server.AD_Server('TC-AD02')
-ad_prod1 = ad_server.AD_Server('TD-AD01')
-ad_prod2 = ad_server.AD_Server('TC-AD02')
-ad_servers = [ad_test1, ad_test2, ad_prod1, ad_prod2]
 
 output = {}
 
+print "Starting scan..."
+
+assets = []
 for result in results:
     ips = result['scan'].keys()
     for ip in ips:
         output[ip] = {}
-        print ip
         dns_rec = dnsTools.lookup(ip)
+        print dns_rec[0]
         if dns_rec[2] is not None:
             output[ip]['dns'] = dns_rec[0]
             ad_results = []
@@ -83,15 +90,36 @@ for result in results:
                 output[ip]['result_code'] = 0  # all good
             elif ad_results.count([]) < len(ad_servers):
                 output[ip]['result_code'] = 2
+                this_asset = gc_asset.Asset(ip,
+					    ad_servers,
+					    ad_results,
+					    2,
+					    dns_rec[0])
+                assets.append(this_asset)
             else:
                 assert len(ad_servers) == ad_results.count([])
                 output[ip]['result_code'] = 3
+                this_asset = gc_asset.Asset(ip,
+					    ad_servers,
+					    ad_results,
+					    3,
+					    dns_rec[0])
+                assets.append(this_asset)
         else:
             output[ip]['result_code'] = 1  # 2 peice missing
+            this_asset = gc_asset.Asset(ip,
+				        ad_servers,
+			                ad_results,
+					1)
+            assets.append(this_asset)
 
-print output
+print "Scan complete"
+print "Creating issues for asset objects..."
+for asset in assets:
+    issue_handler.gen_issue(asset)
 
 if csvfilename:
+    print "Writing output to csv..."
     with open(csvfilename, 'w') as csvfile:
         fieldnames = ['ip', 'result_code']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -101,4 +129,8 @@ if csvfilename:
             writer.writerow({
                 'ip': ip,
                 'result_code': output[ip]['result_code']
+
             })
+    print "Wrote output to " + csvfilename
+
+print "Done"
