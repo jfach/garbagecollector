@@ -13,19 +13,70 @@ step 1:
 download python-nmap dependency and run setup.py 
 
 step 2: 
-add networks that you wish to scan to networks.txt
+add networks that you wish to scan to scripts/seeds/net_seed.txt
 in format:
 ```
 netblock1,192.168.1.0/24
 netblock2,127.0.0.0/24
 ```
+# Configuration
 
-optionally specify file to use instead of networks.txt with --netfile flag:
-```
-python asset_collect.py -n netfile.txt
+Populate configuration file in scripts/resources/config.yaml
+
+Example:
+```yaml
+Credentials:       
+        LDAP:
+                User: jsmith
+                Password: 123password
+        Github:
+                User: jsmith3000
+                Password: password123
+                
+Git_Repo:
+        Repo_Name: hello-world
+        Repo_Owner: octocat
+        
+LDAP_Settings:
+        Base_DN:
 ```
 
-output results to csv with the --csvfile flag:
+# Command Line Arguments
+
+Flag | Usage | Description | Required 
+---- | ----- |-------- | ---
+-a, --adseed | -a /path/to/file.txt | optionally specify Active Directory seed file | No 
+-b, --block | -b 127.0.0.0/24 | optionally scan a single network |No
+-c, --csvfile | -c /path/to/file.csv| optionally output results to a csv file | No
+-n, --netfile | -n /path/to/file.txt| optionally specify Network seed file |No
+
+# Seeds
+
+Seed files are used to identify networks to be scanned and Active Directory servers to check against
+
+default seed files located in scripts/seeds
+
+seed file format:
 ```
-python asset_collect.py -c csv_file.csv
+Description,Value
+Description,Value
+Description,Value
 ```
+
+examples:
+
+net_seed.dat
+```
+local,127.0.0.0/24
+random network,124.43.24.0/24
+```
+
+ad_seed.dat
+```
+server A,AD_Server01
+server B,AD_Server02.example.server.com
+```
+
+
+
+
