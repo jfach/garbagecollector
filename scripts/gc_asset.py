@@ -18,4 +18,3 @@ class Asset():
                 self.ad_results[ad.name] = "Present"
         if name:
             self.name = name
-

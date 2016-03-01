@@ -35,5 +35,3 @@ class AD_Server:
                       'dNSHostName',
                       'name']
         return self.execute(filter, attributes)
-
-

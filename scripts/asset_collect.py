@@ -52,8 +52,8 @@ else:
 ad_servers = []
 with open(ad_seed) as f:
     for line in f:
-      ad = line.rstrip('\n').split(',')
-      ad_servers.append(ad_server.AD_Server(ad[1]))
+        ad = line.rstrip('\n').split(',')
+        ad_servers.append(ad_server.AD_Server(ad[1]))
 
 # logging (test)
 
@@ -122,7 +122,6 @@ if csvfilename:
     with open(csvfilename, 'w') as csvfile:
         fieldnames = ['ip', 'result_code']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
         writer.writerow(dict(zip(writer.fieldnames, writer.fieldnames)))
         for ip in output.keys():
             writer.writerow({

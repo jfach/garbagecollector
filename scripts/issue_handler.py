@@ -59,8 +59,10 @@ def gen_issue(asset):
         # incorrect result code
         return False
 
+
 def create_table(arg):
     return False
+
 
 def create_issue(title, body):
     url = issues_url
@@ -73,9 +75,10 @@ def create_issue(title, body):
                         data=json.dumps(payload),
                         auth=git_credentials)
 
+
 def get_issues():
     url = issues_url
-	payload = {
+    payload = {
                "state": "open",
                "labels": "info:garbage-collections"
               }
@@ -84,11 +87,10 @@ def get_issues():
                        auth=git_credentials)
     return req.json()
 
+
 def check_issue(issues, ip, result_code):
     for issue in issues:
         if ip in issue['title']:
             if result_code in issue['body']:
                 return False
     return True
-
-
