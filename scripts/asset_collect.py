@@ -59,11 +59,11 @@ for k, v in net_dict.iteritems():
 dns_list = []
 lookups = []
 
-ad_test1 = ad_server.AD_Server('TC-AD01')
-ad_test2 = ad_server.AD_Server('TC-AD02')
-ad_prod1 = ad_server.AD_Server('TD-AD01')
-ad_prod2 = ad_server.AD_Server('TC-AD02')
-ad_servers = [ad_test1, ad_test2, ad_prod1, ad_prod2]
+ad_serv01 = ad_server.AD_Server('AD.Server.01.Example.Com')
+ad_serv02 = ad_server.AD_Server('AD.Server.02')
+ad_serv03 = ad_server.AD_Server('AD.Server.03')
+ad_serv04 = ad_server.AD_Server('AD.Server.04')
+ad_servers = [ad_serv01, ad_serv02, ad_serv03, ad_serv04]
 
 output = {}
 
