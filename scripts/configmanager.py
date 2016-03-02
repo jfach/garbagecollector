@@ -1,11 +1,12 @@
+import base_path
 import yaml
 
 
 class ConfigManager:
 
     def __init__(self):
-        config_file = 'resources/config.yaml'
-        config_raw = open(config_file).read()
+        config_fn = base_path.gen_path('resources/config.yaml')
+        config_raw = open(config_fn).read()
         self.config = yaml.load(config_raw)
         self.git_user = self.config['Credentials']['Github']['User']
         self.git_pass = self.config['Credentials']['Github']['Password']
