@@ -34,11 +34,11 @@ for o, a in opts:
     if o in ("-c", "--csvfile"):
         csvfilename = a
     elif o in ("-n", "--netseed"):
-        netfile = base_path.gen_path(a)
+        netfile = a
     elif o in ("-b", "--block"):
         block = a
     elif o in ("-a", "--adseed"):
-        ad_seed = base_path.gen_path(a)
+        ad_seed = a
     else:
         assert False, "unhandled option"
 
