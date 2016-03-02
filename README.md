@@ -63,15 +63,15 @@ Description,Value
 Description,Value
 ```
 
-examples:
+Examples:
 
-net_seed.dat
+net_seed.txt
 ```
 local,127.0.0.0/24
 random network,124.43.24.0/24
 ```
 
-ad_seed.dat
+ad_seed.txt
 ```
 server A,AD_Server01
 server B,AD_Server02.example.server.com
