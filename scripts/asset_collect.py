@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import base_path
 import nmapTools
 import dnsTools
 import csv
@@ -27,17 +28,17 @@ except getopt.GetoptError as err:
     sys.exit(2)
 block = None
 csvfilename = None
-netfile = 'seeds/net_seed.txt'
-ad_seed = 'seeds/ad_seed.txt'
+netfile = base_path.gen_path('seeds/net_seed.txt')
+ad_seed = base_path.gen_path('seeds/ad_seed.txt')
 for o, a in opts:
     if o in ("-c", "--csvfile"):
         csvfilename = a
     elif o in ("-n", "--netseed"):
-        netfile = a
+        netfile = base_path.gen_path(a)
     elif o in ("-b", "--block"):
         block = a
     elif o in ("-a", "--adseed"):
-        ad_seed = a
+        ad_seed = base_path.gen_path(a)
     else:
         assert False, "unhandled option"
 
