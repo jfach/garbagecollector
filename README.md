@@ -38,7 +38,7 @@ Git_Repo:
         Repo_Owner: octocat
         
 LDAP_Settings:
-        Base_DN:
+        Base_DN: 'OU=Org,DC=example,DC=com'
 ```
 
 # Command Line Arguments
